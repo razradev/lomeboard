@@ -59,7 +59,7 @@
         currentWindows: [
           {
             title: 'Lomeboard',
-            content: '/lomeboard.html'
+            content: '/src/lomeboard.html'
           }
         ],
         navButtons: [
@@ -96,21 +96,21 @@
       <x-component
         style="z-index: 50"
         class="wfull"
-        url="/navbar.html"
+        url="/src/navbar.html"
         x-data="{buttons: navButtons}"
       ></x-component>
       <div class="split">
-        <x-component url="/appbar.html" x-data="{buttons: appButtons}">
+        <x-component url="/src/appbar.html" x-data="{buttons: appButtons}">
         </x-component>
         <template x-for="window in currentWindows">
           <x-component
             class="window"
-            url="/frame.html"
+            url="/src/frame.html"
             x-data="{window}"
           ></x-component>
         </template>
       </div>
-      <script type="module" src="/src/main.ts"></script>
+      <script type="module" src="/src/main.js"></script>
     </div>
   </body>
 </html>
