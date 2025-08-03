@@ -1,0 +1,39 @@
+<div class="apps" x-data="{ buttons }">
+  <style>
+    .apps {
+      display: flex;
+      flex-direction: column;
+      width: 4rem;
+      padding: 1 1rem;
+      gap: 1rem;
+      height: 100%;
+    }
+
+    .app-text {
+      font-family: "Jersey 10";
+      font-size: 1rem;
+      line-height: 1.1rem;
+      color: var(--darkest);
+      background-color: var(--lightest);
+      padding: calc(1.5 * var(--pixel-size)) 0rem;
+      text-align: center;
+      margin: 0;
+    }
+
+    .app-icon {
+      width: 2rem;
+      height: 2rem;
+      margin: 0 1rem 0.2rem 1rem;
+    }
+  </style>
+  <div class="app-container" style="margin-bottom: auto">
+    <img class="app-icon" :src="buttons[0].image" />
+    <h1 class="app-text" x-text="buttons[0].name"></h1>
+  </div>
+  <template x-for="button in buttons.slice(1)">
+    <div class="app-container">
+      <img class="app-icon" :src="button.image" />
+      <h1 class="app-text" x-text="button.name"></h1>
+    </div>
+  </template>
+</div>

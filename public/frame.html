@@ -1,0 +1,66 @@
+<div x-data="{ window }" class="frame">
+  <style>
+    h1 {
+      font-size: 2rem;
+      margin: 0;
+      line-height: 1.4rem;
+      font-family: "Jersey 20", sans-serif;
+      color: var(--darkest);
+    }
+
+    .ftop {
+      padding: 0.5rem 0;
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+    }
+
+    .frame {
+      width: 100%;
+      height: 100%;
+      background-color: var(--lightest);
+      border-width: var(--pixel-size);
+      border-color: var(--darkest);
+      border-style: solid;
+      filter: drop-shadow(
+        calc(1.5 * var(--pixel-size)) calc(1.5 * var(--pixel-size))
+          var(--darkest)
+      );
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .stripes {
+      width: 100%;
+      height: calc(11 * var(--pixel-size));
+      background-size: 100% calc(2 * var(--pixel-size));
+      background: repeating-linear-gradient(
+        to bottom,
+        var(--darkest),
+        var(--darkest) var(--pixel-size),
+        var(--lightest) var(--pixel-size),
+        var(--lightest) calc(2 * var(--pixel-size))
+      );
+    }
+  </style>
+  <div class="ftop">
+    <div class="stripes"></div>
+    <h1 class="title" x-text="window.title"></h1>
+    <div class="stripes"></div>
+  </div>
+
+  <div class="content">
+    <x-component
+      class="content"
+      :url="window.content"
+      x-data="window"
+    ></x-component>
+  </div>
+</div>

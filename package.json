@@ -1,0 +1,22 @@
+{
+  "name": "lomeboard",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "alpinejs-component": "^1.2.12",
+    "typescript": "~5.8.3",
+    "vite": "^7.0.4"
+  },
+  "dependencies": {
+    "@imacrayon/alpine-ajax": "^0.12.4",
+    "@types/alpinejs": "^3.13.11",
+    "alpinejs": "^3.14.9",
+    "i": "^0.3.7"
+  }
+}

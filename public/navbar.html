@@ -1,0 +1,248 @@
+<nav class="navbar">
+  <style>
+    h1 {
+      font-size: 2rem;
+      margin: 0;
+      line-height: 1.4rem;
+      font-family: "Jersey 20", sans-serif;
+    }
+
+    button {
+      background-color: transparent;
+      outline: 0;
+      border: 0;
+      padding: 0;
+      margin: 0;
+    }
+
+    .ldeselected {
+      color: var(--darkest);
+      background-color: var(--lightest);
+      height: 4rem;
+      padding: 0rem 1rem 0rem 3.5rem;
+      margin: -1rem -1rem -1rem -3.5rem;
+      line-height: 4rem;
+      transition-duration: 200ms;
+    }
+
+    .ldeselected:hover {
+      background-color: var(--middle);
+      transition-duration: 200ms;
+    }
+
+    .lselected {
+      color: var(--lightest);
+      background-color: var(--darkest);
+      height: 4rem;
+      padding: 0rem 1rem 0rem 3.5rem;
+      margin: -1rem -1rem -1rem -3.5rem;
+      line-height: 4rem;
+      transition-duration: 200ms;
+    }
+
+    .deselected:hover {
+      background-color: var(--middle);
+      transition-duration: 200ms;
+    }
+
+    .selected {
+      color: var(--lightest);
+      background-color: var(--darkest);
+      height: 4rem;
+      padding: 0 0.5rem;
+      margin: -0.5rem -0.5rem;
+      line-height: 4rem;
+      transition-duration: 200ms;
+    }
+
+    .deselected {
+      color: var(--darkest);
+      background-color: var(--lightest);
+      height: 4rem;
+      padding: 0 0.5rem;
+      margin: -0.5rem -0.5rem;
+      line-height: 4rem;
+      transition-duration: 200ms;
+    }
+
+    .dropdown {
+      position: fixed;
+      top: 8rem;
+    }
+
+    .row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 2rem;
+      width: calc(100dvw - 2rem);
+      margin: 0;
+    }
+
+    .navbar {
+      height: 2rem;
+      padding: 1rem;
+      margin: 0;
+      top: 0;
+      left: 0;
+      position: fixed;
+      display: flex;
+      border-width: 0;
+      border-bottom-width: calc(1.5 * var(--pixel-size));
+      border-color: var(--darkest);
+      border-style: solid;
+      background-color: var(--lightest);
+      z-index: 50;
+    }
+
+    .logo {
+      width: 1.4rem;
+      height: 1.4rem;
+      user-select: none;
+    }
+
+    .slogo {
+      height: 1.4rem;
+      width: 1.4rem;
+      padding: 1.5rem 0 1.5rem 1.5rem;
+      margin: -1.5rem 0 -1.5rem -1.5rem;
+      filter: invert();
+    }
+
+    .logo[data-theme="dark"] {
+      filter: invert();
+    }
+
+    .button {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .light-button {
+      width: 1.6rem;
+      height: 1.6rem;
+      border-width: 0 var(--pixel-size) 0 0;
+      border-style: solid;
+    }
+
+    .light-button[data-theme="light"] {
+      background-color: var(--lightest);
+      border-right-color: var(--darkest);
+    }
+
+    .light-button[data-theme="dark"] {
+      background-color: var(--darkest);
+      border-right-color: var(--lightest);
+    }
+
+    .search {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      border-width: var(--pixel-size);
+      border-color: var(--darkest);
+      border-style: solid;
+      background-color: var(--middle);
+      width: fit-content;
+      height: 1.6rem;
+    }
+
+    .searchbox {
+      border: 0;
+      min-width: 16rem;
+      width: 100%;
+      height: 100%;
+      padding: 0.2rem 0.4rem;
+      background-color: transparent;
+      color: var(--darkest);
+      font-size: 1.5rem;
+      line-height: 0.9rem;
+      font-family: "Jersey 15", sans-serif;
+    }
+
+    .searchbox::placeholder {
+      color: var(--darkest);
+      opacity: 0.5;
+    }
+
+    .searchbox:focus {
+      border-radius: 0;
+      outline-width: 0;
+      border-width: var(--pixel-size);
+      border-style: solid;
+    }
+
+    .raised {
+      border-width: var(--pixel-size);
+      border-color: var(--darkest);
+      border-style: solid;
+      filter: drop-shadow(
+        calc(1.5 * var(--pixel-size)) calc(1.5 * var(--pixel-size))
+          var(--darkest)
+      );
+    }
+  </style>
+  <div
+    x-data="{ buttons }"
+    x-init="this.theme = Alpine.reactive({str: document.documentElement.getAttribute('data-theme')});"
+    class="row"
+  >
+    <template x-for="button in buttons">
+      <div
+        class="button"
+        x-data="
+        {
+            button: button,
+            selected: false,
+            state(st) {
+                this.selected = st; 
+            }
+        }"
+      >
+        <template x-if="button.image">
+          <img
+            style="z-index: 2"
+            :data-theme="theme.str"
+            :class="selected ? 'slogo' : 'logo'"
+            :src="button.image"
+          />
+        </template>
+        <h1
+          style="user-select: none; z-index: 1"
+          @click="state(true)"
+          @mouseout="state(false)"
+          :class="let s = selected ? 'selected' : 'deselected'; if (button.name == 'Lomeboard') { s = 'l' + s } return s"
+          x-text="button.name"
+        ></h1>
+        <div class="dropdown" style="color: var(--darkest)" x-show="selected">
+          <h1 style="z-index: 50">CONTENT</h1>
+        </div>
+      </div>
+    </template>
+
+    <form class="search raised">
+      <img
+        :data-theme="theme.str"
+        class="logo light-button"
+        src="/search.png"
+      />
+      <input
+        id="searchbox"
+        autocomplete="off"
+        placeholder="Type something"
+        class="searchbox"
+      />
+    </form>
+
+    <!--<button
+      style="margin-left: auto"
+      @click="
+      document.documentElement.setAttribute('data-theme', this.theme.str == 'light' ? 'dark' : 'light');
+      this.theme.str = this.theme.str == 'light'? 'dark' : 'light';"
+    >
+      <img :src="`/${theme.str}.png`" class="logo" />
+    </button>-->
+  </div>
+</nav>

@@ -1,0 +1,34 @@
+<div
+  x-data="
+  {
+    posts: [
+        {
+            header: 'My dog ate my homework',
+            name: 'John Smith',
+            score: -21,
+            replies: 10,
+            selected: -1,
+        },
+    ]
+  }
+"
+  class="container"
+>
+  <style>
+    .container {
+      display: flex;
+      margin: 1rem;
+      width: calc(100% - 2rem);
+      height: 100%;
+      color: var(--darkest);
+      background-color: var(--lightest);
+    }
+  </style>
+  <template x-for="post in posts">
+    <x-component
+      style="width: 100%"
+      url="/post.html"
+      x-data="post"
+    ></x-component>
+  </template>
+</div>

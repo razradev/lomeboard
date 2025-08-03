@@ -1,0 +1,116 @@
+<html style="background-color: var(--middle)" data-theme="light">
+  <head>
+    <link rel="icon" type="image/png" href="/lomeboard.png" />
+    <title>Lomeboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jersey+10&family=Jersey+15&family=Jersey+20&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      [data-theme="light"] {
+        --darkest: oklch(0.1156 0.0032 285.88);
+        --middle: oklch(93.9% 0.005 56.366);
+        --disabled: oklch(20.4% 0.01 67.558);
+        --lightest: oklch(98.5% 0.001 106.423);
+      }
+
+      [data-theme="dark"] {
+        --lightest: oklch(0.1156 0.0032 285.88);
+        --middle: oklch(20.4% 0.01 67.558);
+        --disabled: oklch(93.9% 0.005 56.366);
+        --darkest: oklch(98.5% 0.001 106.423);
+      }
+
+      * {
+        --green: oklch(62.7% 0.194 149.214);
+        --red: oklch(58.6% 0.253 17.585);
+        image-rendering: pixelated;
+        --pixel-size: 0.125rem;
+        font-weight: normal;
+        font-smooth: never;
+        -webkit-font-smoothing: none;
+        transition-duration: 100ms;
+      }
+
+      .wfull {
+        width: 100dvw;
+        display: flex;
+      }
+
+      .split {
+        display: flex;
+        flex-direction: row;
+        margin: 4rem 0 0 0;
+        width: 100%;
+        height: calc(100dvh - 6rem);
+      }
+
+      .window {
+        width: calc(100% - 7rem);
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      x-data="{
+        currentWindows: [
+          {
+            title: 'Lomeboard',
+            content: '/lomeboard.html'
+          }
+        ],
+        navButtons: [
+            {
+                name: 'Lomeboard',
+                image: '/lomeboard.png'
+            },
+            {
+                name: 'View',
+            }
+        ],
+        appButtons: [
+            {
+                name: 'LB',
+                image: '/lomeboard-icon.png'
+            },
+            {
+                gap: true,
+                name: 'Account',
+                image: '/account.png'
+            },
+            {
+                name: 'Settings',
+                image: '/settings.png'
+            },
+            {
+                name: 'Logoout',
+                image: '/trash.png'
+            }
+        ]
+    }
+    "
+    >
+      <x-component
+        style="z-index: 50"
+        class="wfull"
+        url="/navbar.html"
+        x-data="{buttons: navButtons}"
+      ></x-component>
+      <div class="split">
+        <x-component url="/appbar.html" x-data="{buttons: appButtons}">
+        </x-component>
+        <template x-for="window in currentWindows">
+          <x-component
+            class="window"
+            url="/frame.html"
+            x-data="{window}"
+          ></x-component>
+        </template>
+      </div>
+      <script type="module" src="/src/main.ts"></script>
+    </div>
+  </body>
+</html>

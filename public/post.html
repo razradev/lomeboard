@@ -1,0 +1,86 @@
+<div class="post-container">
+  <style>
+    .post-container {
+      border-bottom-width: var(--pixel-size);
+      border-bottom-color: var(--darkest);
+      border-bottom-style: solid;
+
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin: 0;
+      gap: 0.25rem;
+    }
+
+    .interactions {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+      line-height: 0.9rem;
+      font-family: "Jersey 15", sans-serif;
+      color: var(--darkest);
+      background-color: var(--lightest);
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1rem;
+      line-height: 1.1rem;
+      font-family: "Jersey 10", sans-serif;
+      color: var(--darkest);
+      background-color: var(--lightest);
+    }
+
+    h3 {
+      margin: 0 0 0.25rem 0;
+      font-size: 1rem;
+      line-height: 1.1rem;
+      font-family: "Jersey 10", sans-serif;
+      color: var(--darkest);
+      background-color: var(--lightest);
+    }
+
+    .interaction-button {
+        width: 1.2rem;
+        height: 1.2rem;
+        margin: 0;
+        cursor: pointer;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        border: none;
+    }
+
+    .interaction-image {
+        width: 1.1rem;
+        height: 1.1rem;
+        margin: 0;
+    }
+
+    .spacing {
+      margin-bottom: 0.75rem;
+    }
+  </style>
+  <h1 x-text="post.header"></h1>
+  <h2 class="spacing" x-text="post.name"></h2>
+  <div class="interactions">
+    <button @click="score = score - selected; if (selected != 1) {selected = 1; score++;} else {selected = 0;}" class="interaction-button">
+        <img class="interaction-image" :src="selected == 1 ? '/profit-green.png' : '/profit.png'" />
+    </button>
+    <h3 x-text="post.score" :style="score < 0 ? 'color: var(--red)' : 'color: var(--green)'"></h2>
+    <button @click="score = score - selected; if (selected != -1) {selected = -1; score--;} else {selected = 0;}" class="interaction-button">
+        <img class="interaction-image" :src="selected == -1 ? '/loss-red.png' : '/loss.png'" />
+    </button>
+    <button class="interaction-button">
+        <img class="interaction-image" src="/loss.png" />
+    </button>
+  </div>
+</div>
